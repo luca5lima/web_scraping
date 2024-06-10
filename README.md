@@ -57,9 +57,11 @@ corpos = site.find_all("h1")
 ### 6. Imprimindo os Resultados:
 
 ```python
-print("Titulo:", titulo.get_text())
+for titulo in titulos:
+    print("Titulo:", titulo.get_text())
 
-print("Corpo:", corpo.get_text())
+for corpo in corpos:
+    print("Corpo:", corpo.get_text())
 ```
 
 Itera sobre os elementos encontrados e imprime o texto contido em cada um.
@@ -73,6 +75,16 @@ except requests.exceptions.RequestException as e:
 ```
 
 Captura exceções que podem ocorrer durante a solicitação HTTP e imprime uma mensagem de erro.
+
+### Raciocínio Resumido
+- Importar bibliotecas.
+- Definir a URL.
+- Fazer a solicitação HTTP.
+- Verificar se a solicitação foi bem-sucedida.
+- Analisar o conteúdo HTML.
+- Extrair elementos `<title>` e `<h1>`.
+- Imprimir os resultados.
+- Tratar erros de solicitação HTTP.
 
 ### Executando o Código
 

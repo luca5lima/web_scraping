@@ -2,17 +2,21 @@ import requests
 from bs4 import BeautifulSoup
 
 link = 'http://bianca.com/'
-requisicao = requests.get(link)
-print(requisicao)
-# print(requisicao.text)
-if requisicao.status_code == 200:
-    # Analisa o conteúdo HTML da página
+
+try:
+    requisicao = requests.get(link)
+    requisicao.raise_for_status()  # Verifica se a solicitação foi bem-sucedida
+
     site = BeautifulSoup(requisicao.text, "html.parser")
     
-    titulo = site.find_all("title")
-    corpo = site.find_all("h1")
+    titulos = site.find_all("title")
+    corpos = site.find_all("h1")
     
-    print("titulo: ", titulo)
-    print("corpo: ", corpo)
-else:
-    print("Falha na requisição, status code:", requisicao.status_code)
+    for titulo in titulos:
+        print("Titulo:", titulo.get_text())
+    
+    for corpo in corpos:
+        print("Corpo:", corpo.get_text())
+
+except requests.exceptions.RequestException as e:
+    print(f"Erro na solicitação HTTP: {e}")
